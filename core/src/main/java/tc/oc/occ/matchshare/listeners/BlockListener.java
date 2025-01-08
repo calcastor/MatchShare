@@ -22,7 +22,7 @@ public class BlockListener extends ShareListener {
 
     if (block == null || block.getType() == Material.AIR) return;
     if (player == null || !player.isOnline() || !isParticipating(player)) return;
-    if (block.getBlockStrength() < 0.5) return;
+    // if (block.getBlockStrength() < 0.5) return;
 
     callNewEvent(new PGMPlayerBlockBreakEvent(player, block));
   }

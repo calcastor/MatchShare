@@ -16,22 +16,21 @@ import tc.oc.occ.matchshare.util.MiscUtils;
 import tc.oc.occ.matchshare.util.Supports;
 
 import java.time.Duration;
+import java.util.Random;
 import java.util.UUID;
 
 import static tc.oc.occ.matchshare.util.Supports.Variant.SPORTPAPER;
 
 @Supports(SPORTPAPER)
 public class SpMiscUtils implements MiscUtils {
-    @Override
-    public void dummy() {}
+    static final Random random = new Random();
+
+    static double randomEntityVelocity() {
+        return random.nextDouble() - 0.5D;
+    }
 
     @Override
-    public void sendPacket(Player bukkitPlayer, Object packet) {
-        if (bukkitPlayer.isOnline()) {
-            EntityPlayer nmsPlayer = ((CraftPlayer) bukkitPlayer).getHandle();
-            nmsPlayer.playerConnection.sendPacket((Packet) packet);
-        }
-    }
+    public void dummy() {}
 
     @Override
     public void showFakeItems(Plugin plugin, Player viewer, Location location, ItemStack item, int count, Duration duration) {
@@ -49,9 +48,9 @@ public class SpMiscUtils implements MiscUtils {
                             location.getZ(),
                             CraftItemStack.asNMSCopy(item));
 
-            entity.motX = MiscUtils.randomEntityVelocity();
-            entity.motY = MiscUtils.randomEntityVelocity();
-            entity.motZ = MiscUtils.randomEntityVelocity();
+            entity.motX = randomEntityVelocity();
+            entity.motY = randomEntityVelocity();
+            entity.motZ = randomEntityVelocity();
 
             sendPacket(viewer, new PacketPlayOutSpawnEntity(entity, 2));
             sendPacket(
@@ -63,7 +62,13 @@ public class SpMiscUtils implements MiscUtils {
         scheduleEntityDestroy(plugin, viewer.getUniqueId(), duration, entityIds);
     }
 
-    @Override
+    public void sendPacket(Player bukkitPlayer, Object packet) {
+        if (bukkitPlayer.isOnline()) {
+            EntityPlayer nmsPlayer = ((CraftPlayer) bukkitPlayer).getHandle();
+            nmsPlayer.playerConnection.sendPacket((Packet) packet);
+        }
+    }
+
     public void scheduleEntityDestroy(Plugin plugin, UUID viewerUuid, Duration delay, int[] entityIds) {
         plugin
                 .getServer()

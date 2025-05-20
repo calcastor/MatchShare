@@ -14,14 +14,6 @@ public interface MiscUtils {
 
     void dummy();
 
-    static final Random random = new Random();
-
-    void sendPacket(Player bukkitPlayer, Object packet);
-
-    static double randomEntityVelocity() {
-        return random.nextDouble() - 0.5D;
-    }
-
     void showFakeItems(
             Plugin plugin,
             Player viewer,
@@ -29,7 +21,4 @@ public interface MiscUtils {
             ItemStack item,
             int count,
             Duration duration);
-
-    void scheduleEntityDestroy(
-            Plugin plugin, UUID viewerUuid, Duration delay, int[] entityIds);
 }

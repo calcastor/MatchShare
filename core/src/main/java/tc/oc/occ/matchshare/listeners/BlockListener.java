@@ -9,6 +9,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 import tc.oc.occ.dispense.events.players.PGMPlayerBlockBreakEvent;
 import tc.oc.occ.matchshare.MatchShare;
 
+import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
+
 public class BlockListener extends ShareListener {
 
   public BlockListener(MatchShare plugin) {
@@ -22,7 +24,7 @@ public class BlockListener extends ShareListener {
 
     if (block == null || block.getType() == Material.AIR) return;
     if (player == null || !player.isOnline() || !isParticipating(player)) return;
-    // if (block.getBlockStrength() < 0.5) return;
+    if (MISC_UTILS.getBlockStrength(block) < 0.5) return;
 
     callNewEvent(new PGMPlayerBlockBreakEvent(player, block));
   }

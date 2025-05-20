@@ -7,9 +7,12 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutEntityDestroy;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityMetadata;
 import net.minecraft.server.v1_8_R3.PacketPlayOutSpawnEntity;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_8_R3.block.CraftBlock;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import tc.oc.occ.matchshare.util.MiscUtils;
@@ -84,5 +87,10 @@ public class SpMiscUtils implements MiscUtils {
                             }
                         },
                         delay.getSeconds() * 20);
+    }
+
+    @Override
+    public float getBlockStrength(Block block) {
+        return ((CraftBlock) block).getBlockStrength();
     }
 }

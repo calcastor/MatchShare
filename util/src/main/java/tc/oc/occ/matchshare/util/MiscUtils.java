@@ -1,7 +1,9 @@
 package tc.oc.occ.matchshare.util;
 
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import tc.oc.pgm.util.platform.Platform;
@@ -18,4 +20,6 @@ public interface MiscUtils {
             ItemStack item,
             int count,
             Duration duration);
+
+    float getBlockStrength(Block block);
 }

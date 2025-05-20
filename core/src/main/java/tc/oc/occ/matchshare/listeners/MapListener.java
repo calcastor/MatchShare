@@ -77,15 +77,11 @@ public class MapListener extends ShareListener {
   }
 
   private MatchStatus convertPhase(MatchPhase phase) {
-    switch (phase) {
-      case FINISHED:
-        return MatchStatus.FINISHED;
-      case RUNNING:
-        return MatchStatus.RUNNING;
-      case STARTING:
-        return MatchStatus.STARTING;
-      default:
-        return MatchStatus.IDLE;
-    }
+      return switch (phase) {
+          case FINISHED -> MatchStatus.FINISHED;
+          case RUNNING -> MatchStatus.RUNNING;
+          case STARTING -> MatchStatus.STARTING;
+          default -> MatchStatus.IDLE;
+      };
   }
 }

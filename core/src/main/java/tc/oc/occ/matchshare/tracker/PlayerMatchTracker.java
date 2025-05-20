@@ -40,7 +40,7 @@ public class PlayerMatchTracker {
     for (Duration timePlayed :
         timeLogs.values().stream()
             .map(TeamTimeRecord::getTimePlayed)
-            .collect(Collectors.toList())) {
+            .toList()) {
       total = total.plus(timePlayed);
     }
     return total;
@@ -61,14 +61,12 @@ public class PlayerMatchTracker {
     Optional<Duration> maxTime =
         timeLogs.values().stream()
             .map(TeamTimeRecord::getTimePlayed)
-            .max((t1, t2) -> t1.compareTo(t2));
-    if (maxTime.isPresent()) {
+            .max(Duration::compareTo);
       for (Entry<Competitor, TeamTimeRecord> e : timeLogs.entrySet()) {
-        if (e.getValue().getTimePlayed().equals(maxTime.get())) {
-          return e.getKey();
-        }
+          if (e.getValue().getTimePlayed().equals(maxTime.get())) {
+              return e.getKey();
+          }
       }
-    }
-    return null;
+      return null;
   }
 }

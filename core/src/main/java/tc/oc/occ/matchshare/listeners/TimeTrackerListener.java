@@ -49,10 +49,9 @@ public class TimeTrackerListener extends ShareListener {
       Competitor competitor = Iterables.getOnlyElement(winners);
 
       // For FFAs
-      if (competitor instanceof Tribute) {
-        Tribute tribute = (Tribute) competitor;
+      if (competitor instanceof Tribute tribute) {
 
-        List<String> tributeNames =
+          List<String> tributeNames =
             tribute.getPlayers().stream()
                 .map(
                     mp -> {
@@ -62,11 +61,11 @@ public class TimeTrackerListener extends ShareListener {
                 .collect(Collectors.toList());
 
         if (tributeNames.size() == 1) {
-          winnerName = tributeNames.get(0);
+          winnerName = tributeNames.getFirst();
         } else if (tributeNames.size() == 2) {
           winnerName = String.join(" and ", tributeNames);
         } else {
-          String lastPlayer = tributeNames.remove(tributeNames.size() - 1);
+          String lastPlayer = tributeNames.removeLast();
           winnerName = String.join(", ", tributeNames) + ", and " + lastPlayer;
         }
       } else {
@@ -79,10 +78,9 @@ public class TimeTrackerListener extends ShareListener {
           winners.stream()
               .map(
                   winner -> {
-                    if (winner instanceof Tribute) {
-                      Tribute tribute = (Tribute) winner;
+                    if (winner instanceof Tribute tribute) {
 
-                      List<String> tributeNames =
+                        List<String> tributeNames =
                           tribute.getPlayers().stream()
                               .map(
                                   mp -> {
@@ -92,11 +90,11 @@ public class TimeTrackerListener extends ShareListener {
                               .collect(Collectors.toList());
 
                       if (tributeNames.size() == 1) {
-                        return tributeNames.get(0);
+                        return tributeNames.getFirst();
                       } else if (tributeNames.size() == 2) {
                         return String.join(" and ", tributeNames);
                       } else {
-                        String lastPlayer = tributeNames.remove(tributeNames.size() - 1);
+                        String lastPlayer = tributeNames.removeLast();
                         return String.join(", ", tributeNames) + ", and " + lastPlayer;
                       }
                     } else {
@@ -108,7 +106,7 @@ public class TimeTrackerListener extends ShareListener {
       if (winnerNames.size() == 2) {
         winnerName = String.join(" and ", winnerNames);
       } else {
-        String lastWinner = winnerNames.remove(winnerNames.size() - 1);
+        String lastWinner = winnerNames.removeLast();
         winnerName = String.join(", ", winnerNames) + ", and " + lastWinner;
       }
     } else {
@@ -187,7 +185,7 @@ public class TimeTrackerListener extends ShareListener {
     List<UUID> winnerIds = Lists.newArrayList();
     for (Competitor winner : winners) {
       winnerIds.addAll(
-          winner.getPlayers().stream().map(MatchPlayer::getId).collect(Collectors.toList()));
+          winner.getPlayers().stream().map(MatchPlayer::getId).toList());
     }
     return winnerIds;
   }

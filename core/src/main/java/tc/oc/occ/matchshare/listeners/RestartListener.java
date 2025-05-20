@@ -17,8 +17,7 @@ public class RestartListener extends ShareListener {
 
   @EventHandler
   public void onRestart(CountdownStartEvent event) {
-    if (!(event.getCountdown() instanceof RestartCountdown)) return;
-    RestartCountdown restart = (RestartCountdown) event.getCountdown();
+    if (!(event.getCountdown() instanceof RestartCountdown restart)) return;
     int online = Bukkit.getOnlinePlayers().size();
 
     callNewEvent(new PGMRestartEvent(restart.getRemaining(), online));

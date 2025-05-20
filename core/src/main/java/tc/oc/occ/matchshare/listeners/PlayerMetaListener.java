@@ -73,9 +73,8 @@ public class PlayerMetaListener extends ShareListener {
   private void setMeta(Player player, Party party, String map, boolean running, boolean blitz) {
     boolean participating = party instanceof Competitor;
 
-    if (party instanceof Team) {
-      Team team = (Team) party;
-      player.setMetadata(TEAM_MAX_KEY, new FixedMetadataValue(plugin, team.getMaxPlayers()));
+    if (party instanceof Team team) {
+        player.setMetadata(TEAM_MAX_KEY, new FixedMetadataValue(plugin, team.getMaxPlayers()));
     }
 
     player.setMetadata(MAP_KEY, new FixedMetadataValue(plugin, map));

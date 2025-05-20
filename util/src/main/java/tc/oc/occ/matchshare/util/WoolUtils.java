@@ -42,9 +42,8 @@ public class WoolUtils {
 
     if (gmm != null) {
       for (Goal goal : gmm.getGoals()) {
-        if (goal instanceof MonumentWool) {
-          MonumentWool wool = (MonumentWool) goal;
-          if (wool.hasShowOption(ShowOption.STATS)
+        if (goal instanceof MonumentWool wool) {
+            if (wool.hasShowOption(ShowOption.STATS)
               && !wool.isPlaced()
               && wool.getDyeColor() == color) {
             if (wool.getOwner() == team) {

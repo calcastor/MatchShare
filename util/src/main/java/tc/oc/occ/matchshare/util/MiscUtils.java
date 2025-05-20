@@ -6,8 +6,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 import java.time.Duration;
-import java.util.Random;
-import java.util.UUID;
 
 public interface MiscUtils {
     MiscUtils MISC_UTILS = Platform.get(MiscUtils.class);

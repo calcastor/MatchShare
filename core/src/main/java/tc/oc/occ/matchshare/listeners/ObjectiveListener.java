@@ -88,9 +88,8 @@ public class ObjectiveListener extends ShareListener {
 
   @EventHandler
   public void onFlagDrop(FlagStateChangeEvent event) {
-    if (event.getNewState() instanceof Dropped) {
-      Dropped dropped = (Dropped) event.getNewState();
-      if (dropped.getDropper() != null) {
+    if (event.getNewState() instanceof Dropped dropped) {
+        if (dropped.getDropper() != null) {
         callNewEvent(new PGMFlagDropEvent(dropped.getDropper().getBukkit()));
       }
     }

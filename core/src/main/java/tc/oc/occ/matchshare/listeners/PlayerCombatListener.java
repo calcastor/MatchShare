@@ -39,12 +39,10 @@ public class PlayerCombatListener extends ShareListener {
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onArrowImpact(EntityDamageByEntityEvent event) {
     if (!(event.getEntity() instanceof Player)) return;
-    if (!(event.getDamager() instanceof Arrow)) return;
-    Arrow arrow = (Arrow) event.getDamager();
+    if (!(event.getDamager() instanceof Arrow arrow)) return;
 
-    if (arrow.getShooter() instanceof Player) {
-      Player shooter = (Player) arrow.getShooter();
-      if (isParticipating(shooter) && event.getEntity() != shooter) {
+    if (arrow.getShooter() instanceof Player shooter) {
+          if (isParticipating(shooter) && event.getEntity() != shooter) {
         callNewEvent(new PGMPlayerArrowLandEvent(shooter));
       }
     }
@@ -52,11 +50,8 @@ public class PlayerCombatListener extends ShareListener {
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
   public void onDamageDealt(EntityDamageByEntityEvent event) {
-    if (!(event.getEntity() instanceof Player)) return;
-    if (!(event.getDamager() instanceof Player)) return;
-
-    Player attacker = (Player) event.getDamager();
-    Player receiver = (Player) event.getEntity();
+    if (!(event.getEntity() instanceof Player receiver)) return;
+    if (!(event.getDamager() instanceof Player attacker)) return;
 
     if (isParticipating(attacker) && attacker != receiver) {
       double damage = Math.min(event.getDamage(), 20);

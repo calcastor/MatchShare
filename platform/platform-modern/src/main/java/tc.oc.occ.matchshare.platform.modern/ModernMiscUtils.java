@@ -2,6 +2,7 @@ package tc.oc.occ.matchshare.platform.modern;
 
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.block.CraftBlockType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
@@ -22,6 +23,6 @@ public class ModernMiscUtils implements MiscUtils {
 
     @Override
     public float getBlockStrength(Block block) {
-        return 0;
+        return (((CraftBlockType<?>) block)).getHardness();
     }
 }

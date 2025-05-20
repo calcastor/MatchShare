@@ -21,6 +21,11 @@ import java.util.UUID;
 
 import static tc.oc.occ.matchshare.util.Supports.Variant.SPORTPAPER;
 
+/**
+ * Took some stuff from
+ * https://github.com/OvercastNetwork/ProjectAres/blob/master/Util/bukkit/src/main/java/tc/oc/commons/bukkit/util/NMSHacks.java
+ * for fancy item drops
+ */
 @Supports(SPORTPAPER)
 public class SpMiscUtils implements MiscUtils {
     static final Random random = new Random();

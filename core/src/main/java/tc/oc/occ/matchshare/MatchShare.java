@@ -21,9 +21,6 @@ import tc.oc.occ.matchshare.listeners.WebsiteListener;
 import tc.oc.occ.matchshare.listeners.WoolDestructionListener;
 import tc.oc.occ.matchshare.tracker.MatchCapacityTracker;
 import tc.oc.occ.matchshare.tracker.MatchTimeTracker;
-import tc.oc.occ.matchshare.util.Platform;
-
-import java.util.logging.Level;
 
 public class MatchShare extends JavaPlugin implements Listener {
 
@@ -32,14 +29,6 @@ public class MatchShare extends JavaPlugin implements Listener {
 
   @Override
   public void onEnable() {
-    // Sanity test that we're running on a supported version before doing any work
-    try {
-      Platform.init();
-    } catch (Throwable t) {
-      getLogger().log(Level.SEVERE, "Failed to initialize MatchShare platform", t);
-      getServer().getPluginManager().disablePlugin(this);
-    }
-
     this.timeTracker = new MatchTimeTracker();
     this.capacityTracker = new MatchCapacityTracker(this);
 
@@ -67,7 +56,6 @@ public class MatchShare extends JavaPlugin implements Listener {
   }
 
   private void registerEvents(Listener listener) {
-    Platform.MANIFEST.onEnable(this);
     getServer().getPluginManager().registerEvents(listener, this);
   }
 }

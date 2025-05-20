@@ -13,13 +13,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import tc.oc.occ.matchshare.util.MiscUtils;
-import tc.oc.occ.matchshare.util.Supports;
+import tc.oc.pgm.util.platform.Supports;
 
 import java.time.Duration;
 import java.util.Random;
 import java.util.UUID;
 
-import static tc.oc.occ.matchshare.util.Supports.Variant.SPORTPAPER;
+import static tc.oc.pgm.util.platform.Supports.Variant.SPORTPAPER;
 
 /**
  * Took some stuff from
@@ -33,9 +33,6 @@ public class SpMiscUtils implements MiscUtils {
     static double randomEntityVelocity() {
         return random.nextDouble() - 0.5D;
     }
-
-    @Override
-    public void dummy() {}
 
     @Override
     public void showFakeItems(Plugin plugin, Player viewer, Location location, ItemStack item, int count, Duration duration) {

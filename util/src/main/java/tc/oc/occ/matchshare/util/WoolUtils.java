@@ -1,4 +1,4 @@
-package tc.oc.occ.matchshare.utils;
+package tc.oc.occ.matchshare.util;
 
 import java.util.stream.Stream;
 import org.bukkit.DyeColor;

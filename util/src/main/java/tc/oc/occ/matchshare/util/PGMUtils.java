@@ -1,4 +1,4 @@
-package tc.oc.occ.matchshare.utils;
+package tc.oc.occ.matchshare.util;
 
 import javax.annotation.Nullable;
 import org.bukkit.Bukkit;

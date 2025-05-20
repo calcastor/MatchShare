@@ -1,0 +1,35 @@
+package tc.oc.occ.matchshare.util;
+
+import org.bukkit.Location;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.Plugin;
+
+import java.time.Duration;
+import java.util.Random;
+import java.util.UUID;
+
+public interface MiscUtils {
+    MiscUtils MISC_UTILS = Platform.get(MiscUtils.class);
+
+    void dummy();
+
+    static final Random random = new Random();
+
+    void sendPacket(Player bukkitPlayer, Object packet);
+
+    static double randomEntityVelocity() {
+        return random.nextDouble() - 0.5D;
+    }
+
+    void showFakeItems(
+            Plugin plugin,
+            Player viewer,
+            Location location,
+            ItemStack item,
+            int count,
+            Duration duration);
+
+    void scheduleEntityDestroy(
+            Plugin plugin, UUID viewerUuid, Duration delay, int[] entityIds);
+}

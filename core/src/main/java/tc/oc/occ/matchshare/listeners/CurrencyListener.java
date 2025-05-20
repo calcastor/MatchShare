@@ -22,9 +22,10 @@ import tc.oc.occ.dispense.events.players.PGMPlayerDeathEvent;
 import tc.oc.occ.dispense.events.players.PGMPlayerSportsmanshipEvent;
 import tc.oc.occ.dispense.events.players.PGMPlayerVoteEvent;
 import tc.oc.occ.matchshare.MatchShare;
-import tc.oc.occ.matchshare.utils.NMSHacks;
-import tc.oc.occ.matchshare.utils.WoolUtils;
+import tc.oc.occ.matchshare.util.WoolUtils;
 import tc.oc.pgm.api.match.event.MatchPhaseChangeEvent;
+
+import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
 
 public class CurrencyListener extends ShareListener {
 
@@ -136,7 +137,7 @@ public class CurrencyListener extends ShareListener {
 
   @EventHandler
   public void onDisplayEffect(DisplayFakeItemsEvent event) {
-    NMSHacks.showFakeItems(
+    MISC_UTILS.showFakeItems(
         plugin,
         event.getPlayer(),
         event.getLocation(),

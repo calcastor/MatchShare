@@ -12,7 +12,6 @@ import org.bukkit.craftbukkit.v1_8_R3.block.CraftBlock;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import tc.oc.occ.matchshare.util.MiscUtils;
@@ -35,6 +34,30 @@ public class SpMiscUtils implements MiscUtils {
 
     static double randomEntityVelocity() {
         return random.nextDouble() - 0.5D;
+    }
+
+    @Override
+    public void sendPacket(Player bukkitPlayer, Object packet) {
+        if (bukkitPlayer.isOnline()) {
+            EntityPlayer nmsPlayer = ((CraftPlayer) bukkitPlayer).getHandle();
+            nmsPlayer.playerConnection.sendPacket((Packet) packet);
+        }
+    }
+
+    @Override
+    public void scheduleEntityDestroy(Plugin plugin, UUID viewerUuid, Duration delay, int[] entityIds) {
+        plugin
+                .getServer()
+                .getScheduler()
+                .runTaskLater(
+                        plugin,
+                        () -> {
+                            final Player viewer = plugin.getServer().getPlayer(viewerUuid);
+                            if (viewer != null) {
+                                sendPacket(viewer, new PacketPlayOutEntityDestroy(entityIds));
+                            }
+                        },
+                        delay.getSeconds() * 20);
     }
 
     @Override
@@ -65,28 +88,6 @@ public class SpMiscUtils implements MiscUtils {
         }
 
         scheduleEntityDestroy(plugin, viewer.getUniqueId(), duration, entityIds);
-    }
-
-    public void sendPacket(Player bukkitPlayer, Object packet) {
-        if (bukkitPlayer.isOnline()) {
-            EntityPlayer nmsPlayer = ((CraftPlayer) bukkitPlayer).getHandle();
-            nmsPlayer.playerConnection.sendPacket((Packet) packet);
-        }
-    }
-
-    public void scheduleEntityDestroy(Plugin plugin, UUID viewerUuid, Duration delay, int[] entityIds) {
-        plugin
-                .getServer()
-                .getScheduler()
-                .runTaskLater(
-                        plugin,
-                        () -> {
-                            final Player viewer = plugin.getServer().getPlayer(viewerUuid);
-                            if (viewer != null) {
-                                sendPacket(viewer, new PacketPlayOutEntityDestroy(entityIds));
-                            }
-                        },
-                        delay.getSeconds() * 20);
     }
 
     @Override

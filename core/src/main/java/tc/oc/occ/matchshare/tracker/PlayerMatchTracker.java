@@ -5,7 +5,6 @@ import java.time.Duration;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import tc.oc.pgm.api.party.Competitor;
 
 public class PlayerMatchTracker {
@@ -38,9 +37,7 @@ public class PlayerMatchTracker {
   public Duration getTotalTime() {
     Duration total = Duration.ZERO;
     for (Duration timePlayed :
-        timeLogs.values().stream()
-            .map(TeamTimeRecord::getTimePlayed)
-            .toList()) {
+        timeLogs.values().stream().map(TeamTimeRecord::getTimePlayed).toList()) {
       total = total.plus(timePlayed);
     }
     return total;
@@ -59,14 +56,12 @@ public class PlayerMatchTracker {
   public Competitor getPrimaryTeam() {
     if (timeLogs.isEmpty()) return null;
     Optional<Duration> maxTime =
-        timeLogs.values().stream()
-            .map(TeamTimeRecord::getTimePlayed)
-            .max(Duration::compareTo);
-      for (Entry<Competitor, TeamTimeRecord> e : timeLogs.entrySet()) {
-          if (e.getValue().getTimePlayed().equals(maxTime.get())) {
-              return e.getKey();
-          }
+        timeLogs.values().stream().map(TeamTimeRecord::getTimePlayed).max(Duration::compareTo);
+    for (Entry<Competitor, TeamTimeRecord> e : timeLogs.entrySet()) {
+      if (e.getValue().getTimePlayed().equals(maxTime.get())) {
+        return e.getKey();
       }
-      return null;
+    }
+    return null;
   }
 }

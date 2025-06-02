@@ -31,9 +31,8 @@ public class PlayerCombatListener extends ShareListener {
       assister = event.getAssister().getPlayer().get().getBukkit();
     }
 
-    callNewEvent(
-        new PGMPlayerDeathEvent(
-            dead, killer, assister, event.isSelfKill(), event.isTeamKill(), event.isSuicide()));
+    callNewEvent(new PGMPlayerDeathEvent(
+        dead, killer, assister, event.isSelfKill(), event.isTeamKill(), event.isSuicide()));
   }
 
   @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
@@ -42,7 +41,7 @@ public class PlayerCombatListener extends ShareListener {
     if (!(event.getDamager() instanceof Arrow arrow)) return;
 
     if (arrow.getShooter() instanceof Player shooter) {
-          if (isParticipating(shooter) && event.getEntity() != shooter) {
+      if (isParticipating(shooter) && event.getEntity() != shooter) {
         callNewEvent(new PGMPlayerArrowLandEvent(shooter));
       }
     }

@@ -24,10 +24,9 @@ public class WoolUtils {
       Competitor team = player.getParty();
       PlayerInventory inv = target.getInventory();
       if (inv.contains(Materials.WOOL)) {
-        holdingWool =
-            Stream.of(inv.getContents())
-                .filter(item -> item != null && item.getType() == Materials.WOOL)
-                .anyMatch(item -> WoolUtils.isEnemyWool(item, team));
+        holdingWool = Stream.of(inv.getContents())
+            .filter(item -> item != null && item.getType() == Materials.WOOL)
+            .anyMatch(item -> WoolUtils.isEnemyWool(item, team));
       }
     }
     return holdingWool;
@@ -43,7 +42,7 @@ public class WoolUtils {
     if (gmm != null) {
       for (Goal goal : gmm.getGoals()) {
         if (goal instanceof MonumentWool wool) {
-            if (wool.hasShowOption(ShowOption.STATS)
+          if (wool.hasShowOption(ShowOption.STATS)
               && !wool.isPlaced()
               && wool.getDyeColor() == color) {
             if (wool.getOwner() == team) {

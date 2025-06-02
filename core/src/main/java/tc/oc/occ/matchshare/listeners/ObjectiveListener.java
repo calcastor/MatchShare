@@ -41,16 +41,11 @@ public class ObjectiveListener extends ShareListener {
   @EventHandler
   public void onCoreLeak(CoreLeakEvent event) {
     List<Player> leakers = Lists.newArrayList();
-    event
-        .getCore()
-        .getContributions()
-        .forEach(
-            leaker -> {
-              if (leaker.getPlayerState() != null
-                  && leaker.getPlayerState().getPlayer().isPresent()) {
-                leakers.add(leaker.getPlayerState().getPlayer().get().getBukkit());
-              }
-            });
+    event.getCore().getContributions().forEach(leaker -> {
+      if (leaker.getPlayerState() != null && leaker.getPlayerState().getPlayer().isPresent()) {
+        leakers.add(leaker.getPlayerState().getPlayer().get().getBukkit());
+      }
+    });
     callNewEvent(new PGMCoreLeakEvent(leakers));
   }
 
@@ -66,7 +61,8 @@ public class ObjectiveListener extends ShareListener {
 
       if (event.getGoal() instanceof Flag) {
         if (event.isFirstForPlayer()) {
-          callNewEvent(new PGMFlagPickupEvent(event.getPlayer().getPlayer().get().getBukkit()));
+          callNewEvent(
+              new PGMFlagPickupEvent(event.getPlayer().getPlayer().get().getBukkit()));
         }
       }
     }
@@ -89,7 +85,7 @@ public class ObjectiveListener extends ShareListener {
   @EventHandler
   public void onFlagDrop(FlagStateChangeEvent event) {
     if (event.getNewState() instanceof Dropped dropped) {
-        if (dropped.getDropper() != null) {
+      if (dropped.getDropper() != null) {
         callNewEvent(new PGMFlagDropEvent(dropped.getDropper().getBukkit()));
       }
     }
@@ -98,16 +94,12 @@ public class ObjectiveListener extends ShareListener {
   @EventHandler
   public void onMonumentDestroy(DestroyableDestroyedEvent event) {
     List<Player> destroyers = Lists.newArrayList();
-    event
-        .getDestroyable()
-        .getContributions()
-        .forEach(
-            destroyer -> {
-              if (destroyer.getPlayerState() != null
-                  && destroyer.getPlayerState().getPlayer().isPresent()) {
-                destroyers.add(destroyer.getPlayerState().getPlayer().get().getBukkit());
-              }
-            });
+    event.getDestroyable().getContributions().forEach(destroyer -> {
+      if (destroyer.getPlayerState() != null
+          && destroyer.getPlayerState().getPlayer().isPresent()) {
+        destroyers.add(destroyer.getPlayerState().getPlayer().get().getBukkit());
+      }
+    });
 
     if (!destroyers.isEmpty()) {
       callNewEvent(new PGMMonumentDestroyEvent(destroyers));
@@ -144,11 +136,10 @@ public class ObjectiveListener extends ShareListener {
     // Match is over, give all remaining points
     this.scoreRecords.entrySet().stream()
         .filter(e -> Bukkit.getPlayer(e.getKey()) != null)
-        .forEach(
-            e -> {
-              Player player = Bukkit.getPlayer(e.getKey());
-              callNewEvent(new PGMScoreEvent(player, e.getValue().redeem()));
-            });
+        .forEach(e -> {
+          Player player = Bukkit.getPlayer(e.getKey());
+          callNewEvent(new PGMScoreEvent(player, e.getValue().redeem()));
+        });
 
     this.scoreRecords.clear();
   }

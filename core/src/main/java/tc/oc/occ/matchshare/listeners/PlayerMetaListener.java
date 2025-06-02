@@ -74,7 +74,7 @@ public class PlayerMetaListener extends ShareListener {
     boolean participating = party instanceof Competitor;
 
     if (party instanceof Team team) {
-        player.setMetadata(TEAM_MAX_KEY, new FixedMetadataValue(plugin, team.getMaxPlayers()));
+      player.setMetadata(TEAM_MAX_KEY, new FixedMetadataValue(plugin, team.getMaxPlayers()));
     }
 
     player.setMetadata(MAP_KEY, new FixedMetadataValue(plugin, map));
@@ -82,6 +82,7 @@ public class PlayerMetaListener extends ShareListener {
     player.removeMetadata(participating ? OBS_KEY : PLAY_KEY, plugin);
     player.setMetadata(BLITZ_KEY, new FixedMetadataValue(plugin, blitz));
     player.setMetadata(PARTY_KEY, new FixedMetadataValue(plugin, party.getNameLegacy()));
-    player.setMetadata(PARTY_COLOR_KEY, new FixedMetadataValue(plugin, party.getColor().name()));
+    player.setMetadata(
+        PARTY_COLOR_KEY, new FixedMetadataValue(plugin, party.getColor().name()));
   }
 }

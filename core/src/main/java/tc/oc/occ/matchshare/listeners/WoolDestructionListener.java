@@ -120,7 +120,7 @@ public class WoolDestructionListener extends ShareListener {
     if (gmm != null) {
       for (Goal goal : gmm.getGoals()) {
         if (goal instanceof MonumentWool wool) {
-            if (wool.hasShowOption(ShowOption.STATS)
+          if (wool.hasShowOption(ShowOption.STATS)
               && !wool.isPlaced()
               && wool.getDyeColor() == color) {
             if (wool.getOwner() == team) {

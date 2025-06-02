@@ -1,5 +1,7 @@
 package tc.oc.occ.matchshare.listeners;
 
+import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
+
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import java.util.UUID;
@@ -25,8 +27,6 @@ import tc.oc.occ.matchshare.MatchShare;
 import tc.oc.occ.matchshare.util.WoolUtils;
 import tc.oc.pgm.api.match.event.MatchPhaseChangeEvent;
 
-import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
-
 public class CurrencyListener extends ShareListener {
 
   private Cache<UUID, String> mapVotes;
@@ -42,10 +42,9 @@ public class CurrencyListener extends ShareListener {
         && !event.isSuicide()
         && !event.isSelfKill()
         && event.getKiller() != null) {
-      CurrencyType type =
-          WoolUtils.isHoldingWool(event.getDead())
-              ? CurrencyType.KILL_WOOL_HOLDER
-              : CurrencyType.KILL;
+      CurrencyType type = WoolUtils.isHoldingWool(event.getDead())
+          ? CurrencyType.KILL_WOOL_HOLDER
+          : CurrencyType.KILL;
       callNewEvent(new PlayerEarnCurrencyEvent(event.getKiller(), type));
 
       if (event.getAssister() != null) {
@@ -111,13 +110,12 @@ public class CurrencyListener extends ShareListener {
 
   @EventHandler
   public void onMissionComplete(PlayerCompleteMissionEvent event) {
-    callNewEvent(
-        new PlayerEarnCurrencyEvent(
-            event.getPlayer(),
-            CurrencyType.MISSION_COMPLETION,
-            true,
-            event.getReward(),
-            event.getMissionName()));
+    callNewEvent(new PlayerEarnCurrencyEvent(
+        event.getPlayer(),
+        CurrencyType.MISSION_COMPLETION,
+        true,
+        event.getReward(),
+        event.getMissionName()));
   }
 
   @EventHandler

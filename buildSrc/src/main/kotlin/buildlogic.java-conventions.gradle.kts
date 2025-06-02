@@ -44,6 +44,13 @@ tasks {
     }
 }
 
+spotless {
+    ratchetFrom = "a007e1fa4a53d1d915bea3cf2617070b2d96e0c5"
+    java {
+        removeUnusedImports()
+        palantirJavaFormat("2.67.0").style("GOOGLE").formatJavadoc(true)
+    }
+}
 
 restrictImports {
     group {

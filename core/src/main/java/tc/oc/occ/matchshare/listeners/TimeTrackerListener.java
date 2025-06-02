@@ -51,14 +51,12 @@ public class TimeTrackerListener extends ShareListener {
       // For FFAs
       if (competitor instanceof Tribute tribute) {
 
-          List<String> tributeNames =
-            tribute.getPlayers().stream()
-                .map(
-                    mp -> {
-                      String nickname = Integration.getNick(mp.getBukkit());
-                      return nickname != null ? nickname : mp.getNameLegacy();
-                    })
-                .collect(Collectors.toList());
+        List<String> tributeNames = tribute.getPlayers().stream()
+            .map(mp -> {
+              String nickname = Integration.getNick(mp.getBukkit());
+              return nickname != null ? nickname : mp.getNameLegacy();
+            })
+            .collect(Collectors.toList());
 
         if (tributeNames.size() == 1) {
           winnerName = tributeNames.getFirst();
@@ -74,34 +72,30 @@ public class TimeTrackerListener extends ShareListener {
 
     } else if (winners.size() > 1) {
       // Handle multiple winners
-      List<String> winnerNames =
-          winners.stream()
-              .map(
-                  winner -> {
-                    if (winner instanceof Tribute tribute) {
+      List<String> winnerNames = winners.stream()
+          .map(winner -> {
+            if (winner instanceof Tribute tribute) {
 
-                        List<String> tributeNames =
-                          tribute.getPlayers().stream()
-                              .map(
-                                  mp -> {
-                                    String nickname = Integration.getNick(mp.getBukkit());
-                                    return nickname != null ? nickname : mp.getNameLegacy();
-                                  })
-                              .collect(Collectors.toList());
-
-                      if (tributeNames.size() == 1) {
-                        return tributeNames.getFirst();
-                      } else if (tributeNames.size() == 2) {
-                        return String.join(" and ", tributeNames);
-                      } else {
-                        String lastPlayer = tributeNames.removeLast();
-                        return String.join(", ", tributeNames) + ", and " + lastPlayer;
-                      }
-                    } else {
-                      return winner.getNameLegacy();
-                    }
+              List<String> tributeNames = tribute.getPlayers().stream()
+                  .map(mp -> {
+                    String nickname = Integration.getNick(mp.getBukkit());
+                    return nickname != null ? nickname : mp.getNameLegacy();
                   })
-              .collect(Collectors.toList());
+                  .collect(Collectors.toList());
+
+              if (tributeNames.size() == 1) {
+                return tributeNames.getFirst();
+              } else if (tributeNames.size() == 2) {
+                return String.join(" and ", tributeNames);
+              } else {
+                String lastPlayer = tributeNames.removeLast();
+                return String.join(", ", tributeNames) + ", and " + lastPlayer;
+              }
+            } else {
+              return winner.getNameLegacy();
+            }
+          })
+          .collect(Collectors.toList());
 
       if (winnerNames.size() == 2) {
         winnerName = String.join(" and ", winnerNames);
@@ -121,34 +115,31 @@ public class TimeTrackerListener extends ShareListener {
     if (matchLength.isZero()) return;
 
     // Iterate through all tracked players
-    tracker
-        .getTimeLogs()
-        .forEach(
-            (uuid, data) -> {
+    tracker.getTimeLogs().forEach((uuid, data) -> {
 
-              // End time for player
-              data.endAll();
+      // End time for player
+      data.endAll();
 
-              // Make sure they're online
-              Player player = Bukkit.getPlayer(uuid);
-              if (player != null) {
-                // Check if they should be included as winners
-                if (winnerIds.contains(uuid)
-                    && event.getWinners().contains(data.getPrimaryTeam())
-                    && data.getTimePlayed(data.getPrimaryTeam()).getSeconds()
-                        >= (matchLength.getSeconds() * 0.5)) {
-                  winningPlayers.add(player);
-                }
+      // Make sure they're online
+      Player player = Bukkit.getPlayer(uuid);
+      if (player != null) {
+        // Check if they should be included as winners
+        if (winnerIds.contains(uuid)
+            && event.getWinners().contains(data.getPrimaryTeam())
+            && data.getTimePlayed(data.getPrimaryTeam()).getSeconds()
+                >= (matchLength.getSeconds() * 0.5)) {
+          winningPlayers.add(player);
+        }
 
-                // Ensure they have enough time for participating progress
-                if (data.getTotalTime().getSeconds() >= matchLength.getSeconds() * 0.35) {
-                  participatingPlayers.add(player);
-                }
+        // Ensure they have enough time for participating progress
+        if (data.getTotalTime().getSeconds() >= matchLength.getSeconds() * 0.35) {
+          participatingPlayers.add(player);
+        }
 
-                // Include time played on the player's primary team
-                playerTimes.put(player, data.getTimePlayed(data.getPrimaryTeam()));
-              }
-            });
+        // Include time played on the player's primary team
+        playerTimes.put(player, data.getTimePlayed(data.getPrimaryTeam()));
+      }
+    });
 
     // Call Events for winner & participating
     callNewEvent(new PGMMatchWinnerEvent(winningPlayers));
@@ -184,8 +175,7 @@ public class TimeTrackerListener extends ShareListener {
   private List<UUID> getWinnerIds(Collection<Competitor> winners) {
     List<UUID> winnerIds = Lists.newArrayList();
     for (Competitor winner : winners) {
-      winnerIds.addAll(
-          winner.getPlayers().stream().map(MatchPlayer::getId).toList());
+      winnerIds.addAll(winner.getPlayers().stream().map(MatchPlayer::getId).toList());
     }
     return winnerIds;
   }

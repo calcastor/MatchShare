@@ -58,12 +58,11 @@ public class MapListener extends ShareListener {
       gmc.append(map.getGamemode());
     } else if (!gamemodes.isEmpty()) {
       boolean acronyms = gamemodes.size() > 1;
-      gmc.append(
-          TextFormatter.list(
-              gamemodes.stream()
-                  .map(gm -> text(acronyms ? gm.getAcronym() : gm.getFullName()))
-                  .collect(Collectors.toList()),
-              NamedTextColor.AQUA));
+      gmc.append(TextFormatter.list(
+          gamemodes.stream()
+              .map(gm -> text(acronyms ? gm.getAcronym() : gm.getFullName()))
+              .collect(Collectors.toList()),
+          NamedTextColor.AQUA));
     }
 
     gamemode = TextTranslations.translateLegacy(gmc.build(), Bukkit.getConsoleSender());
@@ -77,11 +76,11 @@ public class MapListener extends ShareListener {
   }
 
   private MatchStatus convertPhase(MatchPhase phase) {
-      return switch (phase) {
-          case FINISHED -> MatchStatus.FINISHED;
-          case RUNNING -> MatchStatus.RUNNING;
-          case STARTING -> MatchStatus.STARTING;
-          default -> MatchStatus.IDLE;
-      };
+    return switch (phase) {
+      case FINISHED -> MatchStatus.FINISHED;
+      case RUNNING -> MatchStatus.RUNNING;
+      case STARTING -> MatchStatus.STARTING;
+      default -> MatchStatus.IDLE;
+    };
   }
 }

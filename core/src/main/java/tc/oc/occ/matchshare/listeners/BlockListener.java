@@ -1,5 +1,7 @@
 package tc.oc.occ.matchshare.listeners;
 
+import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
+
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -8,8 +10,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.block.BlockBreakEvent;
 import tc.oc.occ.dispense.events.players.PGMPlayerBlockBreakEvent;
 import tc.oc.occ.matchshare.MatchShare;
-
-import static tc.oc.occ.matchshare.util.MiscUtils.MISC_UTILS;
 
 public class BlockListener extends ShareListener {
 

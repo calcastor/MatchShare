@@ -21,12 +21,12 @@ dependencies {
     api("tc.oc.occ:Dispense:1.0.0-SNAPSHOT")
 
     compileOnly("dev.pgm.community:core:0.2-SNAPSHOT")
-    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.1-SNAPSHOT")
+    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.5-SNAPSHOT")
     compileOnly("tc.oc.pgm:core:0.16-SNAPSHOT")
     compileOnly("tc.oc.pgm:util:0.16-SNAPSHOT")
     compileOnly("tc.oc.occ:Dewdrop:1.0.0-SNAPSHOT")
     compileOnly("tc.oc.occ:Environment:1.0.0-SNAPSHOT")
-    compileOnly("org.jetbrains:annotations:22.0.0")
+    compileOnly("org.jetbrains:annotations:26.0.2")
 
     compileOnly("com.google.guava:guava:17.0")
 }

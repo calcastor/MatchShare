@@ -8,10 +8,15 @@ import org.bukkit.plugin.Plugin;
 import tc.oc.pgm.util.platform.Platform;
 
 import java.time.Duration;
+import java.util.Random;
 import java.util.UUID;
 
 public interface MiscUtils {
     MiscUtils MISC_UTILS = Platform.get(MiscUtils.class);
+
+    static double randomEntityVelocity() {
+        return new Random().nextDouble() - 0.5D;
+    }
 
     void sendPacket(Player bukkitPlayer, Object packet);
 

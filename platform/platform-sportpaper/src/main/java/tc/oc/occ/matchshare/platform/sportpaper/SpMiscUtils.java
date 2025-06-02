@@ -30,12 +30,6 @@ import static tc.oc.pgm.util.platform.Supports.Variant.SPORTPAPER;
  */
 @Supports(SPORTPAPER)
 public class SpMiscUtils implements MiscUtils {
-    static final Random random = new Random();
-
-    static double randomEntityVelocity() {
-        return random.nextDouble() - 0.5D;
-    }
-
     @Override
     public void sendPacket(Player bukkitPlayer, Object packet) {
         if (bukkitPlayer.isOnline()) {
@@ -76,9 +70,9 @@ public class SpMiscUtils implements MiscUtils {
                             location.getZ(),
                             CraftItemStack.asNMSCopy(item));
 
-            entity.motX = randomEntityVelocity();
-            entity.motY = randomEntityVelocity();
-            entity.motZ = randomEntityVelocity();
+            entity.motX = MiscUtils.randomEntityVelocity();
+            entity.motY = MiscUtils.randomEntityVelocity();
+            entity.motZ = MiscUtils.randomEntityVelocity();
 
             sendPacket(viewer, new PacketPlayOutSpawnEntity(entity, 2));
             sendPacket(

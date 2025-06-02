@@ -7,7 +7,7 @@ plugins {
 }
 
 dependencies {
-    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.1-SNAPSHOT")
+    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.5-SNAPSHOT")
 
     implementation(project(":util"))
 
@@ -19,6 +19,7 @@ tasks.named<ShadowJar>("shadowJar") {
     archiveFileName = "MatchShare.jar"
     archiveClassifier.set("")
     destinationDirectory = rootProject.projectDir.resolve("build/libs")
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 
     minimize {
         // Exclude from minimization as they're required at runtime

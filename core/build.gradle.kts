@@ -44,17 +44,19 @@ publishing {
     }
 }
 
+
+val pluginProperties = mapOf(
+    "description" to project.description,
+    "mainClass" to "tc.oc.occ.matchshare.MatchShare",
+    "version" to project.version,
+    "commitHash" to project.latestCommitHash(),
+    "author" to "applenick"
+)
+
 tasks {
     processResources {
         filesMatching(listOf("plugin.yml")) {
-            expand(
-                "name" to project.name,
-                "description" to project.description,
-                "mainClass" to "tc.oc.occ.matchshare.MatchShare",
-                "version" to project.version,
-                "commitHash" to project.latestCommitHash(),
-                "author" to "applenick"
-            )
+            expand(pluginProperties)
         }
     }
 

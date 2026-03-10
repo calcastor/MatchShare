@@ -25,6 +25,7 @@ tasks.named<ShadowJar>("shadowJar") {
         // Exclude from minimization as they're required at runtime
         exclude(project(":platform-sportpaper"))
         exclude(project(":platform-modern"))
+        exclude(dependency("tc.oc.occ:Dispense:.*"))
     }
 
     dependencies {

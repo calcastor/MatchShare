@@ -23,7 +23,7 @@ import org.bukkit.plugin.Plugin;
 import tc.oc.occ.matchshare.util.PlatformUtils;
 import tc.oc.occ.matchshare.util.Supports;
 
-@Supports(value = PAPER, minVersion = "1.21.10")
+@Supports(value = PAPER, minVersion = "1.21.11")
 public class ModernPlatformUtils implements PlatformUtils {
   @Override
   public void dummy() {}

@@ -23,14 +23,12 @@ dependencies {
     api("org.jspecify:jspecify:1.0.0")
 
     compileOnly("dev.pgm.community:core:0.2-SNAPSHOT")
-    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.10-SNAPSHOT")
+    compileOnly("dev.pgm.paper:paper-api:1.8_1.21.11-SNAPSHOT")
     compileOnly("tc.oc.pgm:core:0.16-SNAPSHOT")
     compileOnly("tc.oc.pgm:util:0.16-SNAPSHOT")
-    compileOnly("tc.oc.occ:Dewdrop:1.0.0-SNAPSHOT") {
-        isTransitive = false
-    }
+    compileOnly("tc.oc.occ:Dewdrop:1.0.0-SNAPSHOT") { isTransitive = false }
     compileOnly("tc.oc.occ:Environment:1.0.0-SNAPSHOT")
-    compileOnly("org.jetbrains:annotations:26.0.2-1")
+    compileOnly("org.jetbrains:annotations:26.1.0")
 
     compileOnly("com.google.guava:guava:17.0")
 }
@@ -53,7 +51,7 @@ spotless {
         removeUnusedImports()
         trimTrailingWhitespace()
         formatAnnotations()
-        palantirJavaFormat("2.86.0").style("GOOGLE").formatJavadoc(true)
+        palantirJavaFormat("2.90.0").style("GOOGLE").formatJavadoc(true)
     }
 }
 

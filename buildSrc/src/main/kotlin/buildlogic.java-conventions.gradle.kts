@@ -19,9 +19,9 @@ repositories {
 }
 
 dependencies {
-    api("tc.oc.occ:Dispense:1.0.0-SNAPSHOT")
     api("org.jspecify:jspecify:1.0.0")
 
+    compileOnly("tc.oc.occ:Dispense:1.0.0-SNAPSHOT")
     compileOnly("dev.pgm.community:core:0.2-SNAPSHOT")
     compileOnly("dev.pgm.paper:paper-api:1.8_1.21.11-SNAPSHOT")
     compileOnly("tc.oc.pgm:core:0.16-SNAPSHOT")

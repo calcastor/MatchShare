@@ -6,7 +6,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
@@ -20,6 +20,7 @@ repositories {
 
 dependencies {
     api("org.jspecify:jspecify:1.0.0")
+    compileOnly("org.jetbrains:annotations:26.1.0")
 
     compileOnly("tc.oc.occ:Dispense:1.0.0-SNAPSHOT")
     compileOnly("dev.pgm.community:core:0.2-SNAPSHOT")
@@ -28,7 +29,6 @@ dependencies {
     compileOnly("tc.oc.pgm:util:0.16-SNAPSHOT")
     compileOnly("tc.oc.occ:Dewdrop:1.0.0-SNAPSHOT") { isTransitive = false }
     compileOnly("tc.oc.occ:Environment:1.0.0-SNAPSHOT")
-    compileOnly("org.jetbrains:annotations:26.1.0")
 
     compileOnly("com.google.guava:guava:17.0")
 }
@@ -51,7 +51,7 @@ spotless {
         removeUnusedImports()
         trimTrailingWhitespace()
         formatAnnotations()
-        palantirJavaFormat("2.90.0").style("GOOGLE").formatJavadoc(true)
+        palantirJavaFormat("2.93.0").style("GOOGLE").formatJavadoc(true)
     }
 }
 
